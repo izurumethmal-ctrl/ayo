@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayodhya Lakmini | Luxury IT Portfolio</title>
+    <!-- Google Fonts: Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            /* Dark Mode (Default) */
+            --primary: #818cf8;
+            --secondary: #c084fc;
+            --accent: #22d3ee;
+            --bg: #020617;
+            --card-bg: rgba(15, 23, 42, 0.6);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --nav-bg: rgba(2, 6, 23, 0.8);
+            --border: rgba(255, 255, 255, 0.05);
+            --input-bg: rgba(15, 23, 42, 0.8);
+            --nav-height: 80px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="light"] {
+            --bg: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --text-main: #0f172a;
+            --text-dim: #475569;
+            --nav-bg: rgba(248, 250, 252, 0.8);
+            --border: rgba(15, 23, 42, 0.1);
+            --input-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(34, 211, 238, 0.08) 0%, transparent 50%);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--nav-height);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10%;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            height: 70px;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.6rem;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--border);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        section {
+            padding: 120px 10%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero {
+            align-items: center;
+            text-align: center;
+        }
+
+        .profile-wrapper {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+
+        .profile-container {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            padding: 4px;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: morph 8s ease-in-out infinite;
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+        }
+
+        .profile-photo {
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            object-fit: cover;
+            background: var(--bg);
+        }
+
+        @keyframes morph {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        }
+
+        .badge {
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--accent);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            padding: 6px 18px;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            background: rgba(34, 211, 238, 0.05);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.2rem;
+            color: var(--text-main);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+        }
+
+        /* Buttons */
+        .cta-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
+        }
+
+        .btn-outline:hover {
+            background: var(--border);
+        }
+
+        /* Skills Section */
+        .section-header {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            padding: 3rem 2rem;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .skill-icon {
+            width: 45px;
+            height: 45px;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .skill-card p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-container {
+            height: 6px;
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        [data-theme="light"] .progress-container {
+            background: rgba(15, 23, 42, 0.05);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            width: 0;
+            transition: width 1.5s ease-out;
+        }
+
+        /* NVQ Highlight */
+        .nvq-banner {
+            margin-top: 5rem;
+            background: linear-gradient(90deg, rgba(99, 102, 241, 0.05), rgba(34, 211, 238, 0.05));
+            border: 1px solid var(--border);
+            padding: 3rem;
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        /* Contact Form */
+        .contact-cta {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            margin-top: 3rem;
+            text-align: left;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            background: var(--input-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-family: inherit;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--primary);
+        }
+
+        footer {
+            padding: 4rem 10%;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 0 5%; }
+            .nav-links { display: none; }
+            section { padding: 100px 5%; }
+            .form-grid { grid-template-columns: 1fr; }
+            .nvq-banner { flex-direction: column; text-align: center; }
+            h1 { font-size: 2.8rem; }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <nav id="navbar">
+        <div class="logo">AYODHYA.</div>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+                <i data-lucide="moon" id="themeIcon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="profile-wrapper">
+            <div class="profile-container">
+                <img src="/asset/IMG_1600.jpg" alt="Ayodhya Lakmini" class="profile-photo">
+            </div>
+        </div>
+        <span class="badge">NVQ Level 4 IT Student</span>
+        <h1>Ayodhya Lakmini <br> Shaluka</h1>
+        <p>Specializing in advanced office productivity and high-performance digital documentation. Currently mastering technical IT workflows for the modern enterprise.</p>
+        <div class="cta-group">
+            <a href="#contact" class="btn btn-primary">
+                <i data-lucide="mail"></i> Get In Touch
+            </a>
+            <a href="./asset/shaluzz-beauty-lounge.pdf"
+   class="btn btn-outline"
+   download="Ayodhya-Lakmini-CV.pdf">
+    <i data-lucide="download"></i> Download CV
+</a>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="section-header">
+            <h2>Professional Toolkit</h2>
+            <p style="color: var(--text-dim); margin-top: 1rem;">Expertise in high-precision office and data software.</p>
+        </div>
+
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i data-lucide="file-text" class="skill-icon"></i>
+                <h3>MS Word</h3>
+                <p>Advanced document architecture, automated reporting, and executive layout design.</p>
+                <div class="progress-container">
+                    <div class="progress-bar" data-val="95%"></div>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <i data-lucide="table" class="skill-icon"></i>
+                <h3>MS Excel</h3>
+                <p>Data intelligence, complex financial formulas, and automated spreadsheet systems.</p>
+                <div class="progress-container">
+                    <div class="progress-bar" data-val="88%"></div>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <i data-lucide="monitor" class="skill-icon"></i>
+                <h3>MS PowerPoint</h3>
+                <p>High-impact visual communication and strategic presentation storytelling.</p>
+                <div class="progress-container">
+                    <div class="progress-bar" data-val="92%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nvq-banner">
+            <div class="nvq-content">
+                <h2>NVQ Level 4 Certification</h2>
+                <p>Information Technology Specialist — Pursuing excellence in hardware, software, and systems management.</p>
+            </div>
+            <i data-lucide="graduation-cap" size="50" style="color: var(--primary);"></i>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="contact-cta">
+            <h2 style="font-size: 3rem; font-weight: 800; margin-bottom: 1.5rem;">Let's Connect</h2>
+            <p style="color: var(--text-dim); margin-bottom: 2rem;">Available for internships, collaborations, and professional opportunities.</p>
+            
+            <div class="contact-form">
+                <form id="portfolioForm">
+                    <div class="form-grid">
+                        <input type="text" placeholder="Name" required>
+                        <input type="email" placeholder="Email" required>
+                    </div>
+                    <textarea rows="5" placeholder="Message" required style="margin-bottom: 2rem;"></textarea>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p style="color: var(--text-dim); font-size: 0.9rem; font-weight: 300;">
+            &copy; 2024 AYODHYA LAKMINI SHALUKA. LUXURY PORTFOLIO.
+        </p>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+
+        // Check for saved preference
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        body.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        function updateThemeIcon(theme) {
+            const iconName = theme === 'dark' ? 'sun' : 'moon';
+            themeIcon.setAttribute('data-lucide', iconName);
+            lucide.createIcons();
+        }
+
+        // Skill Progress Animation
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target.querySelector('.progress-bar');
+                    if (bar) bar.style.width = bar.getAttribute('data-val');
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.skill-card').forEach(card => skillObserver.observe(card));
+
+        // Mock CV Download
+        document.getElementById('downloadCV').addEventListener('click', (e) => {
+            e.preventDefault();
+            // In a real scenario, this would be a direct link to a file:
+            // window.location.href = 'path/to/cv.pdf';
+            const message = document.createElement('div');
+            message.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:var(--primary); color:white; padding:12px 24px; border-radius:10px; z-index:2000; font-weight:600;';
+            message.textContent = "Your CV is being prepared for download...";
+            document.body.appendChild(message);
+            setTimeout(() => message.remove(), 3000);
+        });
+
+        // Form Submission
+        document.getElementById('portfolioForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i data-lucide="check"></i> Message Sent!';
+            lucide.createIcons();
+            e.target.reset();
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                lucide.createIcons();
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
